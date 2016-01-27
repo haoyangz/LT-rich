@@ -14,3 +14,12 @@
 6. Calculate the pair-wise distance of all the valid cells (i.e. cells with at least one valid true barcode).  For any pair of cells, if at least one barcode in cell A and one barcode in cell B has a distance smaller than 0, which is calculated in the same way in (2),  the distance between these two cell is 0. Otherwise, it is 1.
 
 7. Perform hierarchical clustering on the cell using the distance matrix obtain in (5) so that the closest distance between two cluster >= 1.  The closest distance of two cluster is calculated as the smallest distance between any two cell in these two cluster.
+
+## Visualization procedure
+1. Pick only the cells of interest (lineages with >=2 cells) 
+
+2. Normalize the expression data
+	* For each cell, divide the counts for each gene by the total counts in this cell
+	* For each gene, normalize the counts across cells to be with mean of 0 and standard deviation of 1
+
+3. Perform PCA / t-SNE / Isomap visualization 
