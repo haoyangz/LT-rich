@@ -1,3 +1,5 @@
+Check out [here](https://github.com/haoyangz/LT-rich/blob/master/cell-lineage%20mapping.ipynb) for the results, the first part of which is for mESC and the second is for endoderm.
+
 ## The processing procedure
 1. When searching for barcode, using the fist the first 22 and the last 11 bp in the 50bp-long read as filter with **2** bp of mismatch allowed.  
 
@@ -16,10 +18,14 @@
 7. Perform hierarchical clustering on the cell using the distance matrix obtain in (5) so that the closest distance between two cluster >= 1.  The closest distance of two cluster is calculated as the smallest distance between any two cell in these two cluster.
 
 ## Visualization procedure
-1. Pick only the cells of interest (lineages with >=2 cells) 
-
-2. Normalize the expression data
+1. Normalize the expression data
 	* For each cell, divide the counts for each gene by the total counts in this cell
 	* For each gene, normalize the counts across cells to be with mean of 0 and standard deviation of 1
 
-3. Perform PCA / t-SNE / Isomap visualization 
+2. Perform PCA / t-SNE / Isomap visualization. Label each lineage of interest (with cell>=2) by different color and number tag (1 figure for each visualization technique)
+
+3. Perform PCA / t-SNE / Isomap visualization. For each technique, generate 1 figure for each lineage where the cells in that lineage are colored red and all the other cells blue. So there are 3*N figures where N is the number of lineages of interest (with cell >=2).
+
+4. Perform permutation test on the significant of the [Silhouette coefficients](http://scikit-learn.org/stable/modules/clustering.html#clustering-performance-evaluation) of our lineage assignments in PCA (PC1 and PC2) space.
+	* In each permutation, we shuffle the lineage labels of all the cells in the lineages of interest (with cell >=2) and recalculate the Silhouette coefficients.
+	* All the other cells outside of lineages of interest are not considered in this analysis
